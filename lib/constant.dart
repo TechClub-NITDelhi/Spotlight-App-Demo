@@ -17,3 +17,15 @@ const kLinkTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
   color: Colors.black54,
 );
+
+const kFooterDescTextStyle = TextStyle(
+  fontSize: 15.0,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+const kFooterReadMoreTextStyle = TextStyle(
+  fontSize: 12.0,
+  fontWeight: FontWeight.w300,
+  color: Colors.white,
+);

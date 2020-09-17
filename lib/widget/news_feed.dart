@@ -11,20 +11,31 @@ class NewsFeed extends StatefulWidget {
 
 class _NewsFeedState extends State<NewsFeed> {
   ArticlesList articlesList = ArticlesList();
+  bool _isLoading = false;
 
 
   @override
   void initState() {
-
-    //TODO: Implement isLoading
-    articlesList.fetchData();
+    fetchData();
     super.initState();
+  }
+
+  fetchData() async{
+    setState(() {
+      _isLoading = true; // fetching data
+    });
+    await articlesList.fetchData();
+
+    setState(() {
+      _isLoading = false; // data fetching complete
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView.builder(
+      backgroundColor: Colors.transparent,
+      body: (_isLoading)? Center(child: CircularProgressIndicator(),): PageView.builder(
         scrollDirection: Axis.vertical,
           itemCount: articlesList.articles.length,
           itemBuilder: (context, index){

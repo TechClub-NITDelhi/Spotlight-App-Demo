@@ -5,6 +5,7 @@ class Article {
   String imageURL;
   String articleURL;
   String content;
+  String description;
   DateTime publishedAt;
 
   Article(
@@ -13,6 +14,7 @@ class Article {
       this.source,
       this.imageURL,
       this.articleURL,
+      this.description,
       this.content,
       this.publishedAt});
 }
