@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inshorts_clone/models/articles_list.dart';
+import 'package:inshorts_clone/screens/loading_screen.dart';
 
 import 'article_item.dart';
 
@@ -35,7 +36,7 @@ class _NewsFeedState extends State<NewsFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: (_isLoading)? Center(child: CircularProgressIndicator(),): PageView.builder(
+      body: (_isLoading)? Center(child: LoadingScreen(),): PageView.builder(
         scrollDirection: Axis.vertical,
           itemCount: articlesList.articles.length,
           itemBuilder: (context, index){

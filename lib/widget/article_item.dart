@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:inshorts_clone/constant.dart';
 import 'package:inshorts_clone/models/article.dart';
+import 'package:inshorts_clone/screens/web_screen.dart';
 import 'package:intl/intl.dart';
 
 class ArticleItem extends StatelessWidget {
@@ -67,48 +68,60 @@ class ArticleItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.1,
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xfff0f0f0),
-                        image: DecorationImage(
-                            image: NetworkImage(article.imageURL),
-                            fit: BoxFit.cover),
-                      ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      height: double.maxFinite,
-                      width: double.maxFinite,
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          color: Colors.black.withOpacity(0.2),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => WebScreen(
+                            url: article.articleURL,
+                          )));
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xfff0f0f0),
+                          image: DecorationImage(
+                              image: NetworkImage(article.imageURL),
+                              fit: BoxFit.cover),
                         ),
                       ),
-                    ),
-                    Container(
-                      width: double.maxFinite,
-                      padding: EdgeInsets.all(16),
-                      color: Color(0xff000000).withOpacity(0.6),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(article.content, maxLines: 1,
-                          style: kFooterDescTextStyle,),
-                          SizedBox(
-                            height: 4.0,
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        height: double.maxFinite,
+                        width: double.maxFinite,
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Container(
+                            color: Colors.black.withOpacity(0.2),
                           ),
-                          Text('Tap to read more', style:kFooterReadMoreTextStyle)
-                        ],
+                        ),
                       ),
-                    )
-                  ],
+                      Container(
+                        width: double.maxFinite,
+                        padding: EdgeInsets.all(16),
+                        color: Color(0xff000000).withOpacity(0.6),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              article.content,
+                              maxLines: 1,
+                              style: kFooterDescTextStyle,
+                            ),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            Text('Tap to read more',
+                                style: kFooterReadMoreTextStyle)
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

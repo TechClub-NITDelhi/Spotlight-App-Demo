@@ -29,3 +29,13 @@ const kFooterReadMoreTextStyle = TextStyle(
   fontWeight: FontWeight.w300,
   color: Colors.white,
 );
+
+const kLoadingTextStyle = TextStyle(
+  fontSize: 24.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kWebViewTextStyle = TextStyle(
+  fontSize: 12.0,
+  fontWeight: FontWeight.w300,
+);
