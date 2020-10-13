@@ -3,7 +3,7 @@ import 'package:inshorts_clone/services/feed_repository.dart';
 
 class ArticlesList {
   //private
-  List<Article> _list;
+  List<Article> _list = [];
   FeedRepositoryImpl feedRepository = FeedRepositoryImpl();
 
   Future<void> fetchData()async {
@@ -89,11 +89,13 @@ class ArticlesList {
   //
   // ];
   }
-  Future<void> fetchDataByTopic(String topic)async {
-    List<Article> list = await feedRepository.getNewsByCategory(topic);
-    _list = [];
+  Future<void> fetchDataByTopic(String topic) async{
+    List<Article> list = await feedRepository.getNewsByTopic(topic);
     if(list.isNotEmpty){
+      _list.clear();
       _list.addAll(list);
+      print(_list.length);
+      // notifyListeners();
     }
   }
 

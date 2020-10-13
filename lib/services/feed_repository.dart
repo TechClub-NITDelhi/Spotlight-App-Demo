@@ -45,31 +45,34 @@ class FeedRepositoryImpl implements FeedRepository{
 
   @override
   Future<List<Article>> getNewsByTopic(String topic) async{
+    final String url = Global.baseURL +"everything?q=$topic";
     List<Article> list = [];
-    String url = Global.baseURL + 'everything?q=$topic';
-    final response = await http.get(url, headers: {'X-Api-Key': Global.apiKey});
-    if(response.statusCode == 200){
-      final responseBody = jsonDecode(response.body); // endpoint call --> status code == 200 --> body(string) --> json format
-      print(responseBody); // json data --> article list
-      final List data = responseBody['articles'].toList();
 
-      //article --> json format; a --> normal object
-      //article --> a
-      data.forEach((article) {
-        final Article a = Article(
-          title: article['title'] ?? '' ,
-          author: article['author']?? '',
-          description: article['description']?? '',
-          articleURL: article['url']?? 'https://www.google.com',
-          imageURL: article['urlToImage'],
-          content: article['content']?? '',
-          publishedAt: DateTime.parse(article['publishedAt']),
-          source: article['source']['name']?? '',
-        );
+    try{
+      final response = await http.get(url, headers: {"X-Api-Key": Global.apiKey});
+      if(response.statusCode ==  200){
+        final responseBody = jsonDecode(response.body);
+        print(responseBody);
+        final List data = responseBody['articles'].toList();
+        data.forEach((article) {
+          final Article a = Article(
+            title: article['title'] ?? '',
+            description: article['description'] ?? '',
+            content: article['content'] ?? '',
+            author: article['author'] ?? '',
+            publishedAt:DateTime.parse(article['publishedAt']),
+            imageURL: article['urlToImage'] ?? ' ',
+            articleURL: article['url'] ?? 'https://www.google.com',
+            source: article['source'] != null
+                ? article['source']['name']
+                : null,
+          );
+          list.add(a);
+        });
 
-        list.add(a);
-      });
-
+      }
+    }catch(error){
+      print(error);
     }
 
     return list;
