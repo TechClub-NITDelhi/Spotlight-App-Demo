@@ -39,3 +39,12 @@ const kWebViewTextStyle = TextStyle(
   fontSize: 12.0,
   fontWeight: FontWeight.w300,
 );
+
+const kHeadlineTextStyle = TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.w500,
+);
+const kTopicTitleTextStyle = TextStyle(
+  fontSize: 14.0,
+  fontWeight: FontWeight.w600,
+);

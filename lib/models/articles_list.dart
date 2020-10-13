@@ -89,6 +89,13 @@ class ArticlesList {
   //
   // ];
   }
+  Future<void> fetchDataByTopic(String topic)async {
+    List<Article> list = await feedRepository.getNewsByCategory(topic);
+    _list = [];
+    if(list.isNotEmpty){
+      _list.addAll(list);
+    }
+  }
 
   List<Article> get articles => _list;
 
